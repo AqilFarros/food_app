@@ -31,9 +31,8 @@ class _MainPageState extends State<MainPage> {
                 });
               },
               children: [
-                Text(
-                  'Screen 1',
-                  style: heading1,
+                Center(
+                  child: FoodPage(),
                 ),
                 Text(
                   'Screen 2',
@@ -48,9 +47,14 @@ class _MainPageState extends State<MainPage> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Text(
-              'Bottom Navbar',
-              style: heading1,
+            child: BottomNavbar(
+              selectedIndex: selectedPage,
+              onTap: (int index) {
+                setState(() {
+                  selectedPage = index;
+                });
+                pageController.jumpToPage(index);
+              },
             ),
           )
         ],
