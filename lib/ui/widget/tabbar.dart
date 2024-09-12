@@ -15,14 +15,16 @@ class Tabbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 48),
+      height: 50,
       color: Colors.black,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: titles
             .map(
               (e) => Padding(
                 padding: const EdgeInsets.only(left: defaultMargin),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     GestureDetector(
                       onTap: () {
@@ -46,7 +48,7 @@ class Tabbar extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: (titles.indexOf(e) == selectedIndex)
-                            ? darkColor
+                            ? whiteColor
                             : Colors.transparent,
                       ),
                     )

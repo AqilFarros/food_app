@@ -23,6 +23,7 @@ class FoodCard extends StatelessWidget {
             offset: const Offset(1, 1),
           ),
         ],
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         children: [
