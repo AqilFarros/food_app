@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:food_app/model/models.dart';
 import 'package:food_app/shared/shared.dart';
@@ -12,3 +13,4 @@ part 'general_pages.dart';
 part 'address_page.dart';
 part 'main_page.dart';
 part 'food_page.dart';
+part 'detail_page.dart';
