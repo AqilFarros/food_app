@@ -77,14 +77,15 @@ class _DetailPageState extends State<DetailPage> {
                     vertical: 26,
                     horizontal: 16,
                   ),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
                     ),
-                    color: Colors.white,
+                    color: "272727".toColor(),
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -134,7 +135,6 @@ class _DetailPageState extends State<DetailPage> {
                                   style: heading3.copyWith(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w400,
-                                    color: darkColor,
                                   ),
                                 ),
                               ),
@@ -155,8 +155,88 @@ class _DetailPageState extends State<DetailPage> {
                                 ),
                               ),
                             ],
-                          )
+                          ),
                         ],
+                      ),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 14, 0, 16),
+                        child: Text(
+                          widget.food!.description!,
+                          style: heading3,
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Ingredients ',
+                            style: heading3,
+                          ),
+                          Icon(
+                            Icons.info,
+                            color: mainColor,
+                            size: 20,
+                          ),
+                        ],
+                      ),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 4, 0, 16),
+                        child: Text(
+                          widget.food.ingredient!,
+                          style: heading3,
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Total Price ',
+                                  style: heading3,
+                                ),
+                                Icon(
+                                  Icons.monetization_on,
+                                  color: mainColor,
+                                  size: 20,
+                                ),
+                              ],
+                            ),
+                            Text(
+                              NumberFormat.currency(
+                                symbol: 'IDR ',
+                                decimalDigits: 0,
+                                locale: 'id_ID',
+                              ).format(
+                                quantity * widget.food.price!,
+                              ),
+                              style: heading3,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 45,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: mainColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: Text(
+                            'Order Now',
+                            style: heading2,
+                          ),
+                        ),
                       ),
                     ],
                   ),
