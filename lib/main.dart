@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: DetailPage(onBackButtonPressed: (){}, food: mockFoods[1],),
+      home: PaymentPage(transaction: mockTransactions[0]),
     );
   }
 }
