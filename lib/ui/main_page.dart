@@ -34,13 +34,11 @@ class _MainPageState extends State<MainPage> {
                 Center(
                   child: FoodPage(),
                 ),
-                Text(
-                  'Screen 2',
-                  style: heading1,
+                Center(
+                  child: OrderHistoryPage(),
                 ),
-                Text(
-                  'Screen 3',
-                  style: heading1,
+                Center(
+                  child: SuccessOrderPage(),
                 ),
               ],
             ),
