@@ -226,6 +226,131 @@ class PaymentPage extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: defaultMargin,
+                ),
+                Divider(
+                  thickness: 1,
+                  color: whiteColor,
+                ),
+                Text(
+                  "Deliver to:",
+                  style: heading3,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Name Receiver:',
+                      style: heading3,
+                    ),
+                    const Spacer(),
+                    Text(
+                      transaction.user!.name!,
+                      style: heading3,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Email Receiver:',
+                      style: heading3,
+                    ),
+                    const Spacer(),
+                    Text(
+                      transaction.user!.email!,
+                      style: heading3,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Phone Number:',
+                      style: heading3,
+                    ),
+                    const Spacer(),
+                    Text(
+                      transaction.user!.phoneNumber!,
+                      style: heading3,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Address:',
+                      style: heading3,
+                    ),
+                    const Spacer(),
+                    Text(
+                      transaction.user!.address!,
+                      style: heading3,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'House Number:',
+                      style: heading3,
+                    ),
+                    const Spacer(),
+                    Text(
+                      transaction.user!.houseNumber!,
+                      style: heading3,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'City:',
+                      style: heading3,
+                    ),
+                    const Spacer(),
+                    Text(
+                      transaction.user!.city!,
+                      style: heading3,
+                    ),
+                  ],
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 12),
+                  height: 25,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: mainColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(
+                      'Order Now',
+                      style: heading3,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
