@@ -9,9 +9,9 @@ class SuccessOrderPage extends StatelessWidget {
       title: 'You\'ve Made Order.',
       subtitle: 'Just stay at home while we are \npreparing your meal.',
       picturePath: "assets/bike.png",
-      buttonTitle1: "Order Other Meal",
+      buttonTitle1: "Order Other Foods",
       buttonTap1: () {},
-      buttonTitle2: "View Order History",
+      buttonTitle2: "View My Order",
       buttonTap2: () {},
     );
   }
