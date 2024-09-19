@@ -18,7 +18,6 @@ class Tabbar extends StatelessWidget {
       height: 50,
       color: Colors.black,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: titles
             .map(
               (e) => Padding(

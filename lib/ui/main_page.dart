@@ -30,7 +30,7 @@ class _MainPageState extends State<MainPage> {
                   selectedPage = index;
                 });
               },
-              children: [
+              children: const [
                 Center(
                   child: FoodPage(),
                 ),

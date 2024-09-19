@@ -86,4 +86,13 @@ List<Transaction> mockTransactions = [
     status: TransactionStatus.on_delivery,
     user: mockUser,
   ),
+  Transaction(
+    id: 4,
+    food: mockFoods[4],
+    quantity: 7,
+    total: ((mockFoods[4].price! * 7 * 1.1) + 50000).toInt(),
+    dateTime: DateTime.now(),
+    status: TransactionStatus.pending,
+    user: mockUser,
+  ),
 ];
