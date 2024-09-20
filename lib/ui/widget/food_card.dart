@@ -11,6 +11,7 @@ class FoodCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(8),
       width: 200,
       height: 200,
       decoration: BoxDecoration(
@@ -30,6 +31,7 @@ class FoodCard extends StatelessWidget {
           Container(
             height: 140,
             decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
                 image: NetworkImage(food?.picturePath ?? ''),
                 fit: BoxFit.cover,

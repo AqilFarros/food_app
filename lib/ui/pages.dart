@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:food_app/model/models.dart';
 import 'package:food_app/shared/shared.dart';
@@ -23,3 +24,4 @@ part 'illustration_page.dart';
 part 'order_history_page.dart';
 part 'success_order_page.dart';
 part 'success_sign_up_page.dart';
+part 'profile_page.dart';

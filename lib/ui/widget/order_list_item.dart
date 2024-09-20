@@ -55,13 +55,13 @@ class OrderListItem extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(
-            child: Column(
+        const Spacer(),
+        Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              "Waktu",
-              style: greyFontStyle,
+              displayConvertDateTime(transaction.dateTime!),
+              style: heading3,
             ),
             (transaction.status == TransactionStatus.delivered)
                 ? Text(
@@ -83,7 +83,7 @@ class OrderListItem extends StatelessWidget {
                             style: heading2.copyWith(color: Colors.yellow),
                           ),
           ],
-        )),
+        ),
       ],
     );
   }
