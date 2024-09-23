@@ -131,6 +131,13 @@ class _SignInPageState extends State<SignInPage> {
                                   passwordController.text,
                                 );
                             UserState state = context.read<UserCubit>().state;
+
+                            if (state is UserLoaded) {
+                              context.read<FoodCubit>().getFoods();
+                              context.read<Transaction>();
+
+                              Get.to(MainPage());
+                            } else {}
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: mainColor,

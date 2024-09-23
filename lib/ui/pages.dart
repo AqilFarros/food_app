@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:food_app/cubit/cubit.dart';
 import 'package:food_app/cubit/user_cubit.dart';
 import 'package:food_app/model/models.dart';
 import 'package:food_app/shared/shared.dart';
