@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/model/models.dart';
 import 'package:food_app/ui/pages.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MainPage(),
+      home: const SignInPage(),
     );
   }
 }
