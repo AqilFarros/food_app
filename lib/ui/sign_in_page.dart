@@ -119,12 +119,19 @@ class _SignInPageState extends State<SignInPage> {
                 Container(
                   padding: const EdgeInsets.only(right: defaultMargin),
                   child: isLoading
-                      ? SpinKitFadingCircle(
-                          size: 45,
-                          color: mainColor,
-                        )
+                      ? loadingIndicator
                       : ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            setState(() {
+                              isLoading = true;
+                            });
+
+                            await context.read<UserCubit>().signIn(
+                                  emailController.text,
+                                  passwordController.text,
+                                );
+                            UserState state = context.read<UserCubit>().state;
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: mainColor,
                             shape: RoundedRectangleBorder(

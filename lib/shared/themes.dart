@@ -9,6 +9,11 @@ Color darkColor = "151515".toColor();
 Color greyColor = "8D92A3".toColor();
 Color whiteColor = "FFFFFF".toColor();
 
+Widget loadingIndicator = SpinKitFadingCircle(
+  size: 45,
+  color: mainColor,
+);
+
 TextStyle greyFontStyle = GoogleFonts.poppins().copyWith(color: greyColor);
 TextStyle heading1 = GoogleFonts.poppins().copyWith(
   color: whiteColor,
