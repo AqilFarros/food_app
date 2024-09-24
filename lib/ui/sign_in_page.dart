@@ -134,10 +134,33 @@ class _SignInPageState extends State<SignInPage> {
 
                             if (state is UserLoaded) {
                               context.read<FoodCubit>().getFoods();
-                              context.read<Transaction>();
+                              context
+                                  .read<TransactionCubit>()
+                                  .getTransactions();
 
-                              Get.to(MainPage());
-                            } else {}
+                              Get.to(() => MainPage());
+                            } else {
+                              Get.snackbar(
+                                "",
+                                "",
+                                backgroundColor: "D9435E".toColor(),
+                                icon: Icon(
+                                  MdiIcons.closeCircleOutline,
+                                  color: whiteColor,
+                                ),
+                                titleText: Text(
+                                  "Sign In Failed",
+                                  style: heading1,
+                                ),
+                                messageText: Text(
+                                  "Please try again later",
+                                  style: heading3,
+                                ),
+                              );
+                              setState(() {
+                                isLoading = false;
+                              });
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: mainColor,

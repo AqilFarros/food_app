@@ -9,6 +9,6 @@ class UserService {
     return ApiReturnValue(value: mockUser);
 
     // login gagal
-    // return ApiReturnValue(message: "Email atau password salah");
+    return ApiReturnValue(message: "Email atau password salah");
   }
 }
