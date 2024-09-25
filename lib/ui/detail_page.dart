@@ -3,12 +3,12 @@ part of 'pages.dart';
 class DetailPage extends StatefulWidget {
   const DetailPage({
     super.key,
-    required this.onBackButtonPressed,
-    required this.food,
+    this.onBackButtonPressed,
+    this.transaction,
   });
 
-  final Function onBackButtonPressed;
-  final Food food;
+  final Function? onBackButtonPressed;
+  final Transaction? transaction;
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -36,8 +36,8 @@ class _DetailPageState extends State<DetailPage> {
               height: 300,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(widget.food.picturePath ??
-                      'https://ui-avatars.com/api/?name=${widget.food.name}'),
+                  image: NetworkImage(widget.transaction!.food!.picturePath ??
+                      'https://ui-avatars.com/api/?name=${widget.transaction!.food!}'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -96,7 +96,7 @@ class _DetailPageState extends State<DetailPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${widget.food.name}",
+                                  "${widget.transaction!.food!.name}",
                                   style: heading2,
                                   maxLines: 1,
                                 ),
@@ -104,7 +104,7 @@ class _DetailPageState extends State<DetailPage> {
                                   width: 24,
                                 ),
                                 RatingStar(
-                                  rate: widget.food.rate,
+                                  rate: widget.transaction!.food!.rate,
                                 ),
                               ],
                             ),
@@ -161,7 +161,7 @@ class _DetailPageState extends State<DetailPage> {
                       Container(
                         margin: const EdgeInsets.fromLTRB(0, 14, 0, 16),
                         child: Text(
-                          widget.food!.description!,
+                          widget.transaction!.food!.description!,
                           style: heading3,
                           textAlign: TextAlign.justify,
                         ),
@@ -182,7 +182,7 @@ class _DetailPageState extends State<DetailPage> {
                       Container(
                         margin: const EdgeInsets.fromLTRB(0, 4, 0, 16),
                         child: Text(
-                          widget.food.ingredient!,
+                          widget.transaction!.food!.ingredient!,
                           style: heading3,
                           textAlign: TextAlign.justify,
                         ),
@@ -211,7 +211,7 @@ class _DetailPageState extends State<DetailPage> {
                                 decimalDigits: 0,
                                 locale: 'id_ID',
                               ).format(
-                                quantity * widget.food.price!,
+                                quantity * widget.transaction!.food!.price!,
                               ),
                               style: heading3,
                             ),
@@ -225,7 +225,18 @@ class _DetailPageState extends State<DetailPage> {
                         width: double.infinity,
                         height: 45,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(
+                              PaymentPage(
+                                transaction: widget.transaction!.copyWith(
+                                  quntity: quantity,
+                                  total: quantity *
+                                      (widget.transaction!.food!.price!
+                                          .toInt()),
+                                ),
+                              ),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: mainColor,
                             shape: RoundedRectangleBorder(
