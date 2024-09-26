@@ -13,6 +13,8 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return GeneralPages(
@@ -347,7 +349,15 @@ class _PaymentPageState extends State<PaymentPage> {
                   height: 25,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+
+                      bool result = await context.read<TransactionCubit>().submitTransaction(
+                        widget.transaction.copyWith(dateTime: DateTime.now(), total: (widget.transaction.total! * 1.1 + 50000).toInt(),),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: mainColor,
                       shape: RoundedRectangleBorder(

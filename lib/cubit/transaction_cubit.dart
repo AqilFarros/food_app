@@ -19,14 +19,17 @@ class TransactionCubit extends Cubit<TransactionState> {
     }
   }
 
-  Future<void> submitTransaction(Transaction transaction) async {
-    ApiReturnValue<List<Transaction>> result =
-        await TransactionService.submitTransaction(transaction);
+  Future<bool> submitTransaction(Transaction transaction) async {
+  ApiReturnValue<Transaction> result =
+  await TransactionService.submitTransaction(transaction);
 
-    if (result.value != null) {
-      emit(TransactionLoaded(result.value!));
-    } else {
-      emit(TransactionLoadingFailed(result.message!));
-    }
+  if (result.value != null) {
+    emit(TransactionLoaded(
+      (state as TransactionLoaded).transaction + [result.value!],
+    ));
+    return true;
+  } else {
+    return false;
   }
+}
 }
