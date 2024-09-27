@@ -36,7 +36,7 @@ class BottomNavbar extends StatelessWidget {
           GestureDetector(
             onTap: () {
               if (onTap != null) {
-                onTap!(0);
+                onTap(0);
               }
             },
             child: Container(
@@ -55,7 +55,7 @@ class BottomNavbar extends StatelessWidget {
           GestureDetector(
             onTap: () {
               if (onTap != null) {
-                onTap!(1);
+                onTap(1);
               }
             },
             child: Container(

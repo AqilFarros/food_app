@@ -354,9 +354,37 @@ class _PaymentPageState extends State<PaymentPage> {
                         isLoading = true;
                       });
 
-                      bool result = await context.read<TransactionCubit>().submitTransaction(
-                        widget.transaction.copyWith(dateTime: DateTime.now(), total: (widget.transaction.total! * 1.1 + 50000).toInt(),),
-                      );
+                      bool result = await context
+                          .read<TransactionCubit>()
+                          .submitTransaction(
+                            widget.transaction.copyWith(
+                              dateTime: DateTime.now(),
+                              total: (widget.transaction.total! * 1.1 + 50000)
+                                  .toInt(),
+                            ),
+                          );
+
+                      if (result) {
+                        Get.to(const SuccessOrderPage());
+                      } else {
+                        Get.snackbar(
+                                "",
+                                "",
+                                backgroundColor: "D9435E".toColor(),
+                                icon: Icon(
+                                  MdiIcons.closeCircleOutline,
+                                  color: whiteColor,
+                                ),
+                                titleText: Text(
+                                  "Sign In Failed",
+                                  style: heading1,
+                                ),
+                                messageText: Text(
+                                  "Please try again later",
+                                  style: heading3,
+                                ),
+                              );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: mainColor,
