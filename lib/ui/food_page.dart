@@ -16,6 +16,10 @@ class _FoodPageState extends State<FoodPage> {
     super.initState();
   }
 
+  void onRefresh() {
+    context.read<FoodCubit>().getFoods();
+  }
+
   @override
   Widget build(BuildContext context) {
     double listWidth = MediaQuery.of(context).size.width - 2 * defaultMargin;
@@ -98,7 +102,10 @@ class _FoodPageState extends State<FoodPage> {
                                             .user,
                                       ),
                                     ),
-                                  );
+                                  )!
+                                      .then((value) {
+                                    onRefresh();
+                                  });
                                 },
                                 child: FoodCard(
                                   food: food,
@@ -158,7 +165,10 @@ class _FoodPageState extends State<FoodPage> {
                                           .user,
                                     ),
                                   ),
-                                );
+                                )!
+                                    .then((value) {
+                                  onRefresh();
+                                });
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),

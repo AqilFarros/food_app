@@ -27,7 +27,7 @@ class Food extends Equatable {
         id: data['id'],
         name: data['name'],
         description: data['description'],
-        ingredient: data['ingredient'],
+        ingredient: data['ingredients'],
         picturePath: data['picturePath'],
         price: data['price'].toDouble(),
         rate: data['rate'].toDouble(),
