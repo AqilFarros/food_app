@@ -1,7 +1,7 @@
 part of 'user_cubit.dart';
 
 sealed class UserState extends Equatable {
-  UserState();
+  const UserState();
 }
 
 final class UserInitial extends UserState {

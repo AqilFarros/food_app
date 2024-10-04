@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_app/model/models.dart';
@@ -16,5 +18,34 @@ class UserCubit extends Cubit<UserState> {
     } else {
       emit(UserLoadingFailed(result.message!));
     }
+  }
+
+  Future<void> signUp(User user, String password, {File? pictureFile}) async {
+    ApiReturnValue<User> result =
+        await UserService.signUp(user, password, pictureFile: pictureFile);
+
+    if (result.value != null) {
+      emit(UserLoaded(result.value!));
+    } else {
+      emit(UserLoadingFailed(result.message!));
+    }
+  }
+
+  Future<void> uploadProfilePicture(File picture) async {
+    ApiReturnValue<String> result =
+        await UserService.uploadPicturePath(picture);
+
+    if (result.value != null) {
+      emit(
+        UserLoaded(
+          (state as UserLoaded).user.copyWith(
+              picturePath: 'http://food.rtid73.com/storage/${result.value}'),
+        ),
+      );
+    } else {}
+  }
+
+  Future<void> signOut() async {
+    emit(UserInitial());
   }
 }

@@ -43,24 +43,24 @@ class UserService {
       client = http.Client();
     }
 
-    String url = baseUrl + "/register";
+    String url = "$baseUrl/register";
 
-    var response = await http.post(
-      Uri.parse(url),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: {
-        'name': user.name,
-        'email': user.email,
-        'password': password,
-        'password_confirmation': password,
-        'address': user.address,
-        'city': user.city,
-        'houseNumber': user.houseNumber,
-        'phoneNumber': user.phoneNumber,
-      },
-    );
+    var response = await http.post(Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(
+          <String, String>{
+            'name': user.name!,
+            'email': user.email!,
+            'password': password,
+            'password_confirmation': password,
+            'address': user.address!,
+            'city': user.city!,
+            'houseNumber': user.houseNumber!,
+            'phoneNumber': user.phoneNumber!,
+          },
+        ));
 
     if (response.statusCode != 200) {
       return ApiReturnValue(message: "Register failed, please try again");
@@ -68,19 +68,23 @@ class UserService {
 
     var data = jsonDecode(response.body);
 
-    User.token = data['data']['token'];
+    User.token = data['data']['access_token'];
     User value = User.fromJson(data['data']['user']);
 
     // Upload picture
     if (pictureFile != null) {
       ApiReturnValue<String> result = await uploadPicturePath(pictureFile);
+
+      if (result.value != null) {
+        value = value.copyWith(picturePath: "https://food.rtid73.com/storage/${result.value}");
+      }
     }
 
-    return ApiReturnValue();
+    return ApiReturnValue(value: value);
   }
 
-  static Future<ApiReturnValue<String>> uploadPicturePath(
-      File picture, {http.MultipartRequest? request}) async {
+  static Future<ApiReturnValue<String>> uploadPicturePath(File picture,
+      {http.MultipartRequest? request}) async {
     String url = baseUrl + '/user/photo';
 
     var uri = Uri.parse(url);

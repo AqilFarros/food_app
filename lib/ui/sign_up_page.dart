@@ -8,6 +8,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  User? user;
+  File? pictureFile;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -22,6 +24,42 @@ class _SignUpPageState extends State<SignUpPage> {
       },
       child: Column(
         children: <Widget>[
+          GestureDetector(
+            onTap: () async {
+              XFile? pickedFile = await ImagePicker().pickImage(
+                source: ImageSource.gallery,
+              );
+
+              if (pickedFile != null) {
+                pictureFile = File(pickedFile.path);
+                setState(() {});
+              }
+            },
+            child: Container(
+              width: 110,
+              height: 110,
+              margin: const EdgeInsets.only(
+                top: 26,
+              ),
+              padding: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/photo_border.png"),
+                ),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: (pictureFile != null)
+                        ? FileImage(pictureFile!)
+                        : const AssetImage('assets/photo.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+          ),
           Container(
             width: double.infinity,
             margin: const EdgeInsets.fromLTRB(
@@ -158,7 +196,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding: const EdgeInsets.only(right: defaultMargin),
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.to(() => const AddressPage());
+                      Get.to(() => AddressPage(
+                            user: User(
+                                name: nameController.text,
+                                email: emailController.text),
+                            password: passwordController.text,
+                            pictureFile: pictureFile!,
+                          ));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: mainColor,

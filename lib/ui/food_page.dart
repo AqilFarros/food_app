@@ -11,6 +11,12 @@ class _FoodPageState extends State<FoodPage> {
   int selectedIndex = 0;
 
   @override
+  void initState() {
+    context.read<FoodCubit>().getFoods();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double listWidth = MediaQuery.of(context).size.width - 2 * defaultMargin;
 
@@ -70,11 +76,11 @@ class _FoodPageState extends State<FoodPage> {
               builder: (_, state) => (state is FoodLoaded)
                   ? ListView(
                       scrollDirection: Axis.horizontal,
-                      children: mockFoods
+                      children: state.food
                           .map(
                             (food) => Padding(
                               padding: EdgeInsets.only(
-                                  left: food == mockFoods.first
+                                  left: food == state.food.first
                                       ? defaultMargin
                                       : 0,
                                   right: defaultMargin),
@@ -102,7 +108,7 @@ class _FoodPageState extends State<FoodPage> {
                           )
                           .toList(),
                     )
-                  : Center()),
+                  : const Center()),
         ),
         Container(
           width: double.infinity,

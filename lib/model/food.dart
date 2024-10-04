@@ -23,6 +23,28 @@ class Food extends Equatable {
     this.types = const [],
   });
 
+  factory Food.fromJson(Map<String, dynamic> data) => Food(
+        id: data['id'],
+        name: data['name'],
+        description: data['description'],
+        ingredient: data['ingredient'],
+        picturePath: data['picturePath'],
+        price: data['price'].toDouble(),
+        rate: data['rate'].toDouble(),
+        types: data['types'].toString().split(',').map((e) {
+          switch (e) {
+            case 'new_food':
+              return FoodType.newFood;
+            case 'popular':
+              return FoodType.popularFood;
+            case 'recommended':
+              return FoodType.recommended;
+            default:
+              return FoodType.newFood;
+          }
+        }).toList(),
+      );
+
   @override
   List<Object?> get props => [
         id,
@@ -58,7 +80,7 @@ List<Food> mockFoods = [
     ingredient: "Nasi, kambing, bumbu rempah rahasia",
     price: 25000,
     rate: 4.5,
-    types:const [FoodType.newFood, FoodType.popularFood, FoodType.recommended],
+    types: const [FoodType.newFood, FoodType.popularFood, FoodType.recommended],
   ),
   Food(
     id: 3,
@@ -92,7 +114,7 @@ List<Food> mockFoods = [
     ingredient: "Ayam, bumbu pedas, gurih, plecing kangkung, sambal terasi",
     price: 50000,
     rate: 4.8,
-    types:const [FoodType.recommended, FoodType.popularFood],
+    types: const [FoodType.recommended, FoodType.popularFood],
   ),
   Food(
     id: 6,
@@ -104,7 +126,7 @@ List<Food> mockFoods = [
     ingredient: "Gado-Gado, tahu, tempe, lontong",
     price: 20000,
     rate: 4.6,
-    types:const [FoodType.popularFood, FoodType.recommended],
+    types: const [FoodType.popularFood, FoodType.recommended],
   ),
   Food(
     id: 7,

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 
@@ -9,6 +10,7 @@ import 'package:food_app/model/models.dart';
 import 'package:food_app/shared/shared.dart';
 import 'package:food_app/ui/widget/widgets.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:supercharged/supercharged.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

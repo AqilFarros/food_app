@@ -3,11 +3,11 @@ part of 'pages.dart';
 class DetailPage extends StatefulWidget {
   const DetailPage({
     super.key,
-    this.onBackButtonPressed,
+    required this.onBackButtonPressed,
     this.transaction,
   });
 
-  final Function? onBackButtonPressed;
+  final Function onBackButtonPressed;
   final Transaction? transaction;
 
   @override
