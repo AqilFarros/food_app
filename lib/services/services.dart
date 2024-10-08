@@ -8,4 +8,4 @@ part 'food_service.dart';
 part 'transaction_service.dart';
 part "user_service.dart";
 
-String baseUrl = "http://food.rtid73.com/api";
+String baseUrl = "https://food.rtid73.com/api";

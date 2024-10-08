@@ -12,26 +12,26 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TransactionCubit, TransactionState>(
-      builder: (_, state) {
-        if (state is TransactionLoaded) {
-          if (state.transaction.isEmpty) {
-            return IllustrationPage(
-              title: 'Ouch! Hungry',
-              subtitle: 'Seems like you have not\nordered any food yet',
-              picturePath: 'assets/food_wishes.png',
-              buttonTitle1: 'find foods',
-              buttonTap1: () {},
-            );
-          } else {
-            double itemWidth =
-                MediaQuery.of(context).size.width - 2 * defaultMargin;
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<TransactionCubit>().getTransactions();
+      },
+      child: BlocBuilder<TransactionCubit, TransactionState>(
+        builder: (_, state) {
+          if (state is TransactionLoaded) {
+            if (state.transaction.isEmpty) {
+              return IllustrationPage(
+                title: 'Ouch! Hungry',
+                subtitle: 'Seems like you have not\nordered any food yet',
+                picturePath: 'assets/food_wishes.png',
+                buttonTitle1: 'find foods',
+                buttonTap1: () {},
+              );
+            } else {
+              double itemWidth =
+                  MediaQuery.of(context).size.width - 2 * defaultMargin;
 
-            return RefreshIndicator(
-              onRefresh: () async {
-                context.read<TransactionCubit>().getTransactions();
-              },
-              child: ListView(
+              return ListView(
                 children: [
                   Container(
                     width: double.infinity,
@@ -78,11 +78,13 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
                                 ? state.transaction
                                     .where((e) =>
                                         e.status == TransactionStatus.pending ||
-                                        e.status == TransactionStatus.on_delivery)
+                                        e.status ==
+                                            TransactionStatus.on_delivery)
                                     .toList()
                                 : state.transaction
                                     .where((e) =>
-                                        e.status == TransactionStatus.delivered ||
+                                        e.status ==
+                                            TransactionStatus.delivered ||
                                         e.status == TransactionStatus.canceled)
                                     .toList());
                             return Column(
@@ -104,15 +106,15 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
                     ),
                   )
                 ],
-              ),
+              );
+            }
+          } else {
+            return Center(
+              child: loadingIndicator,
             );
           }
-        } else {
-          return Center(
-            child: loadingIndicator,
-          );
-        }
-      },
+        },
+      ),
     );
   }
 }

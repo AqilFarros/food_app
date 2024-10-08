@@ -40,7 +40,7 @@ class Transaction extends Equatable {
     return Transaction(
       id: id ?? this.id,
       food: food ?? this.food,
-      quantity: quntity ?? this.quantity,
+      quantity: quntity ?? quantity,
       status: status ?? this.status,
       dateTime: dateTime ?? this.dateTime,
       total: total ?? this.total,
@@ -53,7 +53,7 @@ class Transaction extends Equatable {
         food: Food.fromJson(data['food']),
         quantity: data['quantity'],
         total: data['total'],
-        dateTime: DateTime.fromMillisecondsSinceEpoch(data['crated_at']),
+        dateTime: DateTime.fromMillisecondsSinceEpoch(data['created_at']),
         user: User.fromJson(data['user']),
         paymentUrl: data['payment_url'],
         status: data['status'] == 'PENDING' ? TransactionStatus.pending :
