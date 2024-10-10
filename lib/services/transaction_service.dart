@@ -61,6 +61,8 @@ class TransactionService {
           'status': 'PENDING',
         }));
 
+    print(response.body); 
+
     if (response.statusCode != 200) {
       return ApiReturnValue(message: 'Failed To Submit Transaction');
     }
