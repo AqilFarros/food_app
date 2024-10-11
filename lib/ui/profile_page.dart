@@ -91,13 +91,19 @@ class AccountTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        RowTab(title: 'Edit Profile'),
-        RowTab(title: 'Home Address'),
-        RowTab(title: 'Security'),
-        RowTab(title: 'Payments'),
-        RowTab(title: 'Sign Out'),
+        const RowTab(title: 'Edit Profile'),
+        const RowTab(title: 'Home Address'),
+        const RowTab(title: 'Security'),
+        const RowTab(title: 'Payments'),
+        InkWell(
+          onTap: () {
+            context.read<UserCubit>().signOut();
+            Get.to(const SignInPage());
+          },
+          child: const RowTab(title: 'Sign Out'),
+        ),
       ],
     );
   }

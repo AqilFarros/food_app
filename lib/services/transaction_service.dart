@@ -14,10 +14,13 @@ class TransactionService {
     print(url);
     print(User.token);
 
-    var response = await client.get(Uri.parse(url), headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ${User.token}',
-    });
+    // var response = await client.get(Uri.parse(url), headers: {
+    //   'Accept': 'application/json',
+    //   'Authorization': 'Bearer ${User.token}',
+    // });
+
+    var response =
+        await client.get(Uri.parse(url), headers: ApiServices.headersGet());
 
     if (response.statusCode != 200) {
       return ApiReturnValue(message: 'Failed To Get Transactions');
@@ -49,10 +52,7 @@ class TransactionService {
     String url = '$baseUrl/checkout';
 
     var response = await client.post(Uri.parse(url),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${User.token}'
-        },
+        headers: ApiServices.headersPost(),
         body: jsonEncode(<String, dynamic>{
           'food_id': transaction.food!.id,
           'user_id': transaction.user!.id,
@@ -61,7 +61,7 @@ class TransactionService {
           'status': 'PENDING',
         }));
 
-    print(response.body); 
+    print(User.token);
 
     if (response.statusCode != 200) {
       return ApiReturnValue(message: 'Failed To Submit Transaction');

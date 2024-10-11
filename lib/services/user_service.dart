@@ -10,9 +10,7 @@ class UserService {
     String url = baseUrl + "/login";
 
     var response = await client.post(Uri.parse(url),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: ApiServices.headersPost(),
         body: jsonEncode(<String, String>{
           'email': email,
           'password': password,
@@ -46,9 +44,7 @@ class UserService {
     String url = "$baseUrl/register";
 
     var response = await http.post(Uri.parse(url),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: ApiServices.headersPost(),
         body: jsonEncode(
           <String, String>{
             'name': user.name!,
@@ -76,7 +72,8 @@ class UserService {
       ApiReturnValue<String> result = await uploadPicturePath(pictureFile);
 
       if (result.value != null) {
-        value = value.copyWith(picturePath: "https://food.rtid73.com/storage/${result.value}");
+        value = value.copyWith(
+            picturePath: "https://food.rtid73.com/storage/${result.value}");
       }
     }
 
@@ -112,5 +109,22 @@ class UserService {
     } else {
       return ApiReturnValue(message: "Failed To Upload Picture");
     }
+  }
+
+  static Future<ApiReturnValue<bool>> logout({http.Client? client}) async {
+    client ??= http.Client();
+
+    String url = '$baseUrl/logout';
+
+    var response = await client.post(Uri.parse(url),
+        headers: ApiServices.headersPost(token: User.token));
+
+    print(response.body);
+
+    if (response.statusCode != 200) {
+      return ApiReturnValue(message: 'Failed To Logout');
+    }
+
+    return ApiReturnValue(value: true);
   }
 }
