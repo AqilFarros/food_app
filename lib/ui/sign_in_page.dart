@@ -122,44 +122,65 @@ class _SignInPageState extends State<SignInPage> {
                       ? loadingIndicator
                       : ElevatedButton(
                           onPressed: () async {
-                            setState(() {
-                              isLoading = true;
-                            });
-
-                            await context.read<UserCubit>().signIn(
-                                  emailController.text,
-                                  passwordController.text,
-                                );
-                            UserState state = context.read<UserCubit>().state;
-
-                            if (state is UserLoaded) {
-                              context.read<FoodCubit>().getFoods();
-                              context
-                                  .read<TransactionCubit>()
-                                  .getTransactions();
-
-                              Get.to(() => MainPage());
-                            } else {
+                            if (emailController.text == "" ||
+                                passwordController.text == "") {
                               Get.snackbar(
                                 "",
                                 "",
                                 backgroundColor: "D9435E".toColor(),
                                 icon: Icon(
                                   MdiIcons.closeCircleOutline,
-                                  color: whiteColor,
+                                  color: Colors.white,
                                 ),
                                 titleText: Text(
                                   "Sign In Failed",
                                   style: heading1,
                                 ),
                                 messageText: Text(
-                                  "Please try again later",
+                                  "Please fill all the fields",
                                   style: heading3,
                                 ),
                               );
+                            } else {
                               setState(() {
-                                isLoading = false;
+                                isLoading = true;
                               });
+
+                              await context.read<UserCubit>().signIn(
+                                    emailController.text,
+                                    passwordController.text,
+                                  );
+                              UserState state = context.read<UserCubit>().state;
+
+                              if (state is UserLoaded) {
+                                context.read<FoodCubit>().getFoods();
+                                context
+                                    .read<TransactionCubit>()
+                                    .getTransactions();
+
+                                Get.to(() => MainPage());
+                              } else {
+                                Get.snackbar(
+                                  "",
+                                  "",
+                                  backgroundColor: "D9435E".toColor(),
+                                  icon: Icon(
+                                    MdiIcons.closeCircleOutline,
+                                    color: whiteColor,
+                                  ),
+                                  titleText: Text(
+                                    "Sign In Failed",
+                                    style: heading1,
+                                  ),
+                                  messageText: Text(
+                                    "Please try again later",
+                                    style: heading3,
+                                  ),
+                                );
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              }
                             }
                           },
                           style: ElevatedButton.styleFrom(

@@ -215,7 +215,29 @@ class _AddressPageState extends State<AddressPage> {
                     ? loadingIndicator
                     : ElevatedButton(
                         onPressed: () async {
-                          User user = widget.user.copyWith(
+                          if (addressController.text == "" ||
+                              phoneNumberController.text == "" ||
+                              houseNumberController.text == "" ||
+                              selectedCity == null) {
+                            Get.snackbar(
+                              "",
+                              "",
+                              backgroundColor: "D9435E".toColor(),
+                              icon: Icon(
+                                MdiIcons.closeCircleOutline,
+                                color: whiteColor,
+                              ),
+                              titleText: Text(
+                                "Sign Up Failed",
+                                style: heading1,
+                              ),
+                              messageText: Text(
+                                "Please fill all the fields",
+                                style: heading3,
+                              ),
+                            );
+                          } else {
+                            User user = widget.user.copyWith(
                             address: addressController.text,
                             phoneNumber: phoneNumberController.text,
                             houseNumber: houseNumberController.text,
@@ -227,7 +249,7 @@ class _AddressPageState extends State<AddressPage> {
                           });
 
                           // Simulasi penundaan (hanya untuk pengujian, bisa dihapus)
-                          await Future.delayed(const Duration(seconds: 2));
+                          // await Future.delayed(const Duration(seconds: 2));
 
                           // memanggil fungsi signup
                           await context.read<UserCubit>().signUp(
@@ -248,7 +270,7 @@ class _AddressPageState extends State<AddressPage> {
                             Get.snackbar(
                               "",
                               "",
-                              backgroundColor: Colors.black,
+                              backgroundColor: "D9435E".toColor(),
                               icon: Icon(
                                 MdiIcons.closeCircleOutline,
                                 color: whiteColor,
@@ -267,6 +289,7 @@ class _AddressPageState extends State<AddressPage> {
                           setState(() {
                             isLoading = false;
                           });
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: mainColor,

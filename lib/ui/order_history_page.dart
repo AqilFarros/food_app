@@ -90,11 +90,19 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
                             return Column(
                               children: transactions
                                   .map(
-                                    (e) => Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: OrderListItem(
-                                        transaction: e,
-                                        itemWidth: itemWidth,
+                                    (e) => GestureDetector(
+                                      onTap: () {
+                                        Get.to(
+                                          PaymentMethodPage(
+                                              paymentUrl: e.paymentUrl!),
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: OrderListItem(
+                                          transaction: e,
+                                          itemWidth: itemWidth,
+                                        ),
                                       ),
                                     ),
                                   )
