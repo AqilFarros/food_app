@@ -96,7 +96,14 @@ class AccountTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const RowTab(title: 'Edit Profile'),
+        InkWell(
+          child: RowTab(title: 'Edit Profile'),
+          onTap: () {
+            Get.to(EditProfilePage())!.then((value) => context
+                .read<UserCubit>()
+                .getUser((context.read<UserCubit>().state as UserLoaded).user));
+          },
+        ),
         const RowTab(title: 'Home Address'),
         const RowTab(title: 'Security'),
         const RowTab(title: 'Payments'),
