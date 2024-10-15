@@ -127,4 +127,38 @@ class UserService {
 
     return ApiReturnValue(value: true);
   }
+
+  static Future<ApiReturnValue<User>> updateProfile(User user,
+      {http.Client? client}) async {
+    String url = '$baseUrl/user';
+
+    client ??= http.Client();
+
+    var response = await client.put(
+      Uri.parse(url),
+      headers: ApiServices.headersPost(token: User.token),
+      body: jsonEncode(
+        <String, dynamic>{
+          'name': user.name,
+          'address': user.address,
+          'city': user.city,
+          'houseNumber': user.houseNumber,
+          'phoneNumber': user.phoneNumber,
+        },
+      ),
+    );
+
+    if (response.statusCode != 200) {
+      return ApiReturnValue(
+          message: 'Update profile failed, please try again later.');
+    }
+
+    var data = jsonDecode(response.body);
+
+    User value = User.fromJson(data['data']);
+
+    return ApiReturnValue(value: value);
+  }
+
+  static 
 }
